@@ -57,6 +57,7 @@ function ReadData() {
                             <th>ID</th>
                             <th>Emp First name</th>
                             <th>Emp Last name</th>
+                            <th>Gender</th>
                             <th>Designation</th>
                             <th>Salary</th>
                             <th>Action</th>
@@ -87,6 +88,7 @@ function ReadData() {
                                                     <td>{index + 1}</td>
                                                     <td>{empdata.emp_fname}</td>
                                                     <td>{empdata.emp_lname}</td>
+                                                    <td>{empdata.gender}</td>
                                                     <td>{empdata.designation}</td>
                                                     <td>{empdata.salary}</td>
                                                     <td>

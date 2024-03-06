@@ -2,9 +2,12 @@ import React, { useState } from 'react'
 import axios from "axios";
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
+import { keyboard } from '@testing-library/user-event/dist/keyboard';
 function AddData() {
 
     // const [counter, setCounter] = useState(1)
+
+
     const [employee, setEmployee] = useState({
         emp_id: new Date().getTime(),
         emp_fname: "",
@@ -14,14 +17,18 @@ function AddData() {
         gender: "",
         language: []
     })
+
+    const lagArr = ['HTML', 'CSS', 'JAVASCRIPT'];
+
+
     const navigate = useNavigate()
 
     const handleChange = (event) => {
-        const { name, value, checked } = event.target;
+        const { name, value, checked, type } = event.target;
         console.log("name -- value", name, value);
 
 
-        if (name === 'language') {
+        if (type === 'checkbox') {
             if (checked) {
                 setEmployee((prevState) => ({
                     ...prevState,
@@ -34,11 +41,14 @@ function AddData() {
                 }));
             }
         }
-        // else if(name==='gender'){
-        //     if()
-        //     setEmployee({...employee ,[name]:value.charAt(0).toUpperCase() + value.substr(1)} ) 
-
-        // } 
+        else if (type === 'radio') {
+            setEmployee((preState) => {
+                return {
+                    ...preState,
+                    [name]: value
+                }
+            })
+        }
         else {
             setEmployee((prevState) => ({
                 ...prevState,
@@ -87,7 +97,6 @@ function AddData() {
             alert("Please Fill all fields correctly")
         }
 
-
     }
     return (
         <>
@@ -104,16 +113,25 @@ function AddData() {
 
                     <label>Employee salary</label>
                     <input type="number" name="salary" id="" value={employee.salary} onChange={handleChange} />
+                    <label>Gender : </label>
                     <label>Male</label>
                     <input type="radio" name="gender" id="" value="male" onChange={handleChange} />
+
                     <label>FeMale</label>
                     <input type="radio" name="gender" id="" value="male" onChange={handleChange} />
                     <br />
 
-                    HTML
-                    <input type="checkbox" name="language" id="" value="HTML" onChange={handleChange} />
-                    CSS
-                    <input type="checkbox" name="language" id="" value="CSS" onChange={handleChange} />
+                    {
+                        lagArr.map((lang, i) => {
+                            return (
+                                <React.Fragment key={lang} >
+                                    <label htmlFor={lang}>{lang}</label>
+                                    <input type="checkbox" id={lang} name="language" value={lang} checked={employee?.language && employee.language.includes(lang)} onChange={handleChange} />
+
+                                </React.Fragment>
+                            )
+                        })
+                    }
 
                     <button type='submit'>Submit</button>
                 </form>

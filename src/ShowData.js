@@ -6,6 +6,7 @@ import { useParams } from 'react-router';
 function ShowData() {
     const [employee, setEmployee] = useState([]);
     const lagArr = ["HTML", "CSS", "JS"]
+    const genderArr = ["male", "female"]
 
     const { emp_id } = useParams();
     console.log("Emp_id--", emp_id);
@@ -42,23 +43,36 @@ function ShowData() {
 
                     <label>Employee salary</label>
                     <input type="number" name="salary" id="" value={employee[0] ? employee[0].salary : ""} readOnly />
-                    <label>Language</label> <br />
-                    
                     {
-                        lagArr.map((lag, i) => {
+                        genderArr.map((value, index) => {
                             return (
                                 <>
-                                    <label>{lag}</label>
-                                    <input type="checkbox" name="language" id={lag} value={lag} checked={employee[0]?.language && employee[0].language.includes(lag)} />
+                                    <label htmlFor={value}>{value}</label>
+                                    <input type="radio" name="gender" id={value} value={value} checked={employee[0]?.gender && employee[0].gender.includes(value)} />
+                                </>
+                            )
+                        })
+                    }
+
+
+                    <br />
+
+                    {
+                        lagArr.map((lang, i) => {
+                            return (
+                                <>
+                                    <label>{lang}</label>
+                                    <input type="checkbox" name="language" id={lang} value={lang} checked={employee[0]?.language && employee[0].language.includes(lang)} />
                                 </>
                             )
                         })
                     }
 
                 </form>
-            </div>
+            </div >
         </>
     )
+
 }
 
 export default ShowData

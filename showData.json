@@ -6,9 +6,11 @@
       "emp_lname": "gajjar",
       "designation": "Intern",
       "salary": 1000,
+      "gender": "male",
       "language": [
         "CSS",
-        "HTML"
+        "HTML",
+        "JAVASCRIPT"
       ],
       "id": "b3f9"
     },
@@ -16,9 +18,10 @@
       "emp_id": 2,
       "emp_fname": "bhavesh",
       "emp_lname": "soni",
-      "designation": "backend",
+      "designation": "backend dev",
       "salary": 5000,
-      "language": [],
+      "gender": "female",
+      "language": "HTML",
       "id": "df2d"
     },
     {
@@ -27,6 +30,7 @@
       "emp_lname": "desai",
       "designation": "frontend",
       "salary": 3000,
+      "gender": "female",
       "language": [
         "CSS"
       ],
@@ -38,37 +42,20 @@
       "emp_fname": "dilip",
       "emp_lname": "mehta",
       "designation": "dev",
+      "gender": "female",
       "language": [],
       "salary": "98099"
     },
     {
-      "id": "824a",
-      "emp_id": 1709550347963,
-      "emp_fname": "tirth",
-      "emp_lname": "patel",
-      "designation": "QA    ",
-      "salary": "998",
-      "language": []
-    },
-    {
-      "id": "359d",
-      "emp_id": 1709555865133,
-      "emp_fname": "addv",
-      "emp_lname": "vdda",
-      "designation": "saler",
-      "language": [],
-      "salary": "10000"
-    },
-    {
-      "id": "cdf0",
-      "emp_id": 1709708827718,
-      "emp_fname": "muzzu",
-      "emp_lname": "qwe",
-      "designation": "dev",
-      "salary": "12299",
+      "id": "012e",
+      "emp_id": 1709738644888,
+      "emp_fname": "qwe",
+      "emp_lname": "asd",
+      "designation": "asd",
+      "salary": "123",
+      "gender": "male",
       "language": [
-        "HTML",
-        "CSS"
+        "HTML"
       ]
     }
   ]

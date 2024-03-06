@@ -9,6 +9,9 @@ function EditData() {
     const [employee, setEmployee] = useState({});
     const [initialEmployee, setInitialEmployee] = useState({});
     const lagArr = ['HTML', 'CSS', 'JAVASCRIPT'];
+    const genderArr = ['male', 'female']
+
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         fetchEmpData();
@@ -20,6 +23,7 @@ function EditData() {
             .then((res) => {
                 setEmployee(res.data[0]);
                 setInitialEmployee(res.data[0]);
+                setLoading(false);
             })
             .catch((err) => alert('Failed to fetch employee data'));
     };
@@ -27,16 +31,15 @@ function EditData() {
 
 
     const handleChange = (event) => {
-        const { name, value, checked } = event.target;
+        const { name, value, checked, type } = event.target;
 
-        if (name === 'language') {
+        if (type === 'checkbox') {
             if (checked) {
-
                 if (employee.language && !employee.language.includes(value)) {
-                    console.log("true", !employee.language.includes(value));
+                    console.log("true", employee.language.includes(value));
                     setEmployee((prevState) => ({
                         ...prevState,
-                        language: [...prevState.language, value]
+                        language: [...prevState.language, value],
                     }));
                 }
             } else {
@@ -46,7 +49,17 @@ function EditData() {
                     language: prevState.language.filter(lang => lang !== value)
                 }));
             }
-        } else {
+        }
+
+        else if (type === 'radio') {
+            if (checked) {
+                setEmployee((prevState) => ({
+                    ...prevState,
+                    gender: value
+                }));
+            }
+        }
+        else {
             setEmployee((prevState) => ({
                 ...prevState,
                 [name]: value
@@ -75,6 +88,8 @@ function EditData() {
         setEmployee(initialEmployee);
     };
     return (
+
+
         <div className='container'>
             <h4>Edit Employee</h4>
             <form onSubmit={handleSubmitData}>
@@ -86,16 +101,27 @@ function EditData() {
                 <input type="text" name="designation" id="" value={employee.designation} onChange={handleChange} />
                 <label>Employee salary</label>
                 <input type="number" name="salary" id="" value={employee.salary} onChange={handleChange} />
+                {
+                    genderArr.map((genValue, index) => {
+                        return (
+                            <React.Fragment key={genValue} >
+                                <label htmlFor={genValue}>{genValue}</label>
+                                <input type="radio" name="gender" value={genValue} checked={employee?.gender === genValue} onChange={handleChange} />
+                            </React.Fragment>
+                        )
+                    })
+                }
+                <br />
                 <label>Language</label> <br />
 
                 {
-                    lagArr.map((lag, i) => {
+                    lagArr.map((lang, i) => {
                         return (
-                            <>
-                                <label htmlFor={lag}>{lag}</label>
-                                <input type="checkbox" id={lag} name="language" value={lag} checked={employee?.language && employee.language.includes(lag)} onChange={handleChange} />
+                            <React.Fragment key={lang} >
+                                <label htmlFor={lang}>{lang}</label>
+                                <input type="checkbox" id={lang} name="language" value={lang} checked={employee?.language && employee.language.includes(lang)} onChange={handleChange} />
 
-                            </>
+                            </React.Fragment>
                         )
                     })
                 }
@@ -104,7 +130,7 @@ function EditData() {
                 <button type='submit'>Submit</button>
                 <button type='button' className='mx-3' onClick={handleResetData}>Reset</button>
             </form>
-        </div>
+        </div >
     );
 }
 
