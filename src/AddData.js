@@ -4,26 +4,50 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
 function AddData() {
 
-    const [counter, setCounter] = useState(1)
+    // const [counter, setCounter] = useState(1)
     const [employee, setEmployee] = useState({
         emp_id: new Date().getTime(),
         emp_fname: "",
         emp_lname: "",
         designation: "",
-        salary: ""
+        salary: "",
+        gender: "",
+        language: []
     })
     const navigate = useNavigate()
 
     const handleChange = (event) => {
-        const { name, value } = event.target;
-        console.log("Hey--", name, value);
-        setEmployee((prevalue) => {
-            return {
-                ...prevalue,
-                [name]: value
+        const { name, value, checked } = event.target;
+        console.log("name -- value", name, value);
+
+
+        if (name === 'language') {
+            if (checked) {
+                setEmployee((prevState) => ({
+                    ...prevState,
+                    language: [...prevState.language, value]
+                }));
+            } else {
+                setEmployee((prevState) => ({
+                    ...prevState,
+                    language: prevState.language.filter(lang => lang !== value)
+                }));
             }
-        })
-    }
+        }
+        // else if(name==='gender'){
+        //     if()
+        //     setEmployee({...employee ,[name]:value.charAt(0).toUpperCase() + value.substr(1)} ) 
+
+        // } 
+        else {
+            setEmployee((prevState) => ({
+                ...prevState,
+                [name]: value
+            }));
+        }
+    };
+
+
     function validate() {
         let flag = true;
 
@@ -80,6 +104,17 @@ function AddData() {
 
                     <label>Employee salary</label>
                     <input type="number" name="salary" id="" value={employee.salary} onChange={handleChange} />
+                    <label>Male</label>
+                    <input type="radio" name="gender" id="" value="male" onChange={handleChange} />
+                    <label>FeMale</label>
+                    <input type="radio" name="gender" id="" value="male" onChange={handleChange} />
+                    <br />
+
+                    HTML
+                    <input type="checkbox" name="language" id="" value="HTML" onChange={handleChange} />
+                    CSS
+                    <input type="checkbox" name="language" id="" value="CSS" onChange={handleChange} />
+
                     <button type='submit'>Submit</button>
                 </form>
             </div>

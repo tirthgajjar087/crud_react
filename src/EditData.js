@@ -8,10 +8,12 @@ function EditData() {
     const navigate = useNavigate()
     const [employee, setEmployee] = useState({});
     const [initialEmployee, setInitialEmployee] = useState({});
+    const lagArr = ['HTML', 'CSS', 'JAVASCRIPT'];
 
     useEffect(() => {
         fetchEmpData();
     }, []);
+    console.log("emp", employee)
 
     const fetchEmpData = () => {
         axios.get(`http://localhost:9002/employee?id=${id}`)
@@ -22,10 +24,36 @@ function EditData() {
             .catch((err) => alert('Failed to fetch employee data'));
     };
 
+
+
     const handleChange = (event) => {
-        const { name, value } = event.target;
-        setEmployee({ ...employee, [name]: value });
+        const { name, value, checked } = event.target;
+
+        if (name === 'language') {
+            if (checked) {
+
+                if (employee.language && !employee.language.includes(value)) {
+                    console.log("true", !employee.language.includes(value));
+                    setEmployee((prevState) => ({
+                        ...prevState,
+                        language: [...prevState.language, value]
+                    }));
+                }
+            } else {
+                console.log("false");
+                setEmployee((prevState) => ({
+                    ...prevState,
+                    language: prevState.language.filter(lang => lang !== value)
+                }));
+            }
+        } else {
+            setEmployee((prevState) => ({
+                ...prevState,
+                [name]: value
+            }));
+        }
     };
+
 
     const handleSubmitData = (e) => {
         e.preventDefault();
@@ -46,7 +74,6 @@ function EditData() {
     const handleResetData = () => {
         setEmployee(initialEmployee);
     };
-
     return (
         <div className='container'>
             <h4>Edit Employee</h4>
@@ -59,6 +86,21 @@ function EditData() {
                 <input type="text" name="designation" id="" value={employee.designation} onChange={handleChange} />
                 <label>Employee salary</label>
                 <input type="number" name="salary" id="" value={employee.salary} onChange={handleChange} />
+                <label>Language</label> <br />
+
+                {
+                    lagArr.map((lag, i) => {
+                        return (
+                            <>
+                                <label htmlFor={lag}>{lag}</label>
+                                <input type="checkbox" id={lag} name="language" value={lag} checked={employee?.language && employee.language.includes(lag)} onChange={handleChange} />
+
+                            </>
+                        )
+                    })
+                }
+
+
                 <button type='submit'>Submit</button>
                 <button type='button' className='mx-3' onClick={handleResetData}>Reset</button>
             </form>
@@ -67,3 +109,4 @@ function EditData() {
 }
 
 export default EditData;
+

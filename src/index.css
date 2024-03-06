@@ -54,10 +54,9 @@ form {
 }
 
 form label {
-  display: block;
   text-align: left;
   font-weight: 500;
-  margin: 5px 0px;
+  margin: 6px 0px;
 }
 
 form input[type="text"],
@@ -67,6 +66,13 @@ form input[type="text"],
   border: none;
   padding: 4px 3px;
   border-radius: 5px;
+}
+
+form input[type="checkbox"] {
+  /* display: inline; */
+  margin: 5px 15px 0px 9px;
+
+  /* display: block; */
 }
 
 form button {

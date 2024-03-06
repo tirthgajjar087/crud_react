@@ -5,6 +5,7 @@ import { useParams } from 'react-router';
 
 function ShowData() {
     const [employee, setEmployee] = useState([]);
+    const lagArr = ["HTML", "CSS", "JS"]
 
     const { emp_id } = useParams();
     console.log("Emp_id--", emp_id);
@@ -41,6 +42,19 @@ function ShowData() {
 
                     <label>Employee salary</label>
                     <input type="number" name="salary" id="" value={employee[0] ? employee[0].salary : ""} readOnly />
+                    <label>Language</label> <br />
+                    
+                    {
+                        lagArr.map((lag, i) => {
+                            return (
+                                <>
+                                    <label>{lag}</label>
+                                    <input type="checkbox" name="language" id={lag} value={lag} checked={employee[0]?.language && employee[0].language.includes(lag)} />
+                                </>
+                            )
+                        })
+                    }
+
                 </form>
             </div>
         </>
