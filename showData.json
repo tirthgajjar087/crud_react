@@ -1,0 +1,52 @@
+{
+  "employee": [
+    {
+      "emp_id": 1,
+      "emp_fname": "tirth",
+      "emp_lname": "gajjar",
+      "designation": "Intern",
+      "salary": 1000,
+      "id": "b3f9"
+    },
+    {
+      "emp_id": 2,
+      "emp_fname": "bhavesh",
+      "emp_lname": "soni",
+      "designation": "backend",
+      "salary": 5000,
+      "id": "df2d"
+    },
+    {
+      "emp_id": 3,
+      "emp_fname": "hardik",
+      "emp_lname": "desai",
+      "designation": "frontend",
+      "salary": 3000,
+      "id": "e4d6"
+    },
+    {
+      "id": "3f44",
+      "emp_id": 4,
+      "emp_fname": "dilip",
+      "emp_lname": "mehta",
+      "designation": "dev",
+      "salary": "98099"
+    },
+    {
+      "id": "824a",
+      "emp_id": 1709550347963,
+      "emp_fname": "tirth",
+      "emp_lname": "patel",
+      "designation": "QA    ",
+      "salary": "998"
+    },
+    {
+      "id": "359d",
+      "emp_id": 1709555865133,
+      "emp_fname": "addv",
+      "emp_lname": "vdda",
+      "designation": "saler",
+      "salary": "10000"
+    }
+  ]
+}
