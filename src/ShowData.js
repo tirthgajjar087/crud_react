@@ -12,8 +12,6 @@ function ShowData() {
     console.log("Emp_id--", emp_id);
 
     const showSubmitData = (e) => {
-
-
         axios.get(`http://localhost:9002/employee?emp_id=${emp_id}`)
             .then((res) => {
                 setEmployee(res.data)

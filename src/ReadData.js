@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
-import { Outlet, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function ReadData() {
     const [employee, setEmployee] = useState([])
@@ -8,7 +8,6 @@ function ReadData() {
     const navigate = useNavigate()
 
     const fetchData = () => {
-
         axios.get("http://localhost:9002/employee")
             .then((res) => {
                 setEmployee(res.data)
@@ -22,12 +21,12 @@ function ReadData() {
 
     }
 
+
     const deleteData = (id) => {
-        console.log("Deleting employee with ID:", id);
+        console.log("Delete Emp_ID:", id);
 
         axios.delete(`http://localhost:9002/employee/${id}`)
             .then((res) => {
-                alert("delete one employee ")
                 setEmployee(prevEmployees => prevEmployees.filter(emp => emp.id !== id));
                 console.log("Employee deleted successfully!");
             })
@@ -44,7 +43,6 @@ function ReadData() {
     console.log("emp", employee)
     return (
         <>
-
             <div className='container mt-3 d-flex flex-column gap-4 justify-content-center'>
                 <h4>Employee Data</h4>
                 <div className='d-flex justify-content-end'>
@@ -91,12 +89,12 @@ function ReadData() {
                                                     <td>{empdata.gender}</td>
                                                     <td>{empdata.designation}</td>
                                                     <td>{empdata.salary}</td>
+
                                                     <td>
                                                         <button className='btn btn-warning mx-3' onClick={() => navigate(`/show_data/${empdata.emp_id}`)}>View</button>
                                                         <button className='btn btn-success mx-3' onClick={() => navigate(`/edit_data/${empdata.id}`)}>Edit</button>
                                                         <button className='btn  btn-outline-danger' onClick={() => { deleteData(empdata.id) }}>Delete</button>
                                                     </td>
-
 
                                                 </tr>
                                             )

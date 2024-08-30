@@ -3,11 +3,14 @@ import axios from 'axios';
 import { json, useNavigate, useParams } from 'react-router';
 
 function EditData() {
+
     const { id } = useParams();
     console.log("Emp_id--", id);
     const navigate = useNavigate()
+
     const [employee, setEmployee] = useState({});
     const [initialEmployee, setInitialEmployee] = useState({});
+    
     const lagArr = ['HTML', 'CSS', 'JAVASCRIPT'];
     const genderArr = ['male', 'female']
 
@@ -23,7 +26,6 @@ function EditData() {
             .then((res) => {
                 setEmployee(res.data[0]);
                 setInitialEmployee(res.data[0]);
-                setLoading(false);
             })
             .catch((err) => alert('Failed to fetch employee data'));
     };
@@ -35,6 +37,7 @@ function EditData() {
 
         if (type === 'checkbox') {
             if (checked) {
+
                 if (employee.language && !employee.language.includes(value)) {
                     console.log("true", employee.language.includes(value));
                     setEmployee((prevState) => ({
@@ -42,7 +45,8 @@ function EditData() {
                         language: [...prevState.language, value],
                     }));
                 }
-            } else {
+            }
+             else {
                 console.log("false");
                 setEmployee((prevState) => ({
                     ...prevState,

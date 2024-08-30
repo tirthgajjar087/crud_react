@@ -5,9 +5,6 @@ import { useNavigate } from 'react-router';
 import { keyboard } from '@testing-library/user-event/dist/keyboard';
 function AddData() {
 
-    // const [counter, setCounter] = useState(1)
-
-
     const [employee, setEmployee] = useState({
         emp_id: new Date().getTime(),
         emp_fname: "",
@@ -19,8 +16,6 @@ function AddData() {
     })
 
     const lagArr = ['HTML', 'CSS', 'JAVASCRIPT'];
-
-
     const navigate = useNavigate()
 
     const handleChange = (event) => {
@@ -41,6 +36,8 @@ function AddData() {
                 }));
             }
         }
+
+
         else if (type === 'radio') {
             setEmployee((preState) => {
                 return {
@@ -61,10 +58,11 @@ function AddData() {
     function validate() {
         let flag = true;
 
-        for (let key in employee) {
-            console.log("key--", key);
-            console.log("Value ==", employee[key]);
-            if (!employee[key]) flag = false;
+        for (const key in employee) {
+            if (!employee[key]) {
+                alert(`Please enter your ${key}`);
+                flag = false;
+            }
         }
 
         return flag;
@@ -79,7 +77,6 @@ function AddData() {
         if (validate()) {
             axios.post('http://localhost:9002/employee', employee).then(
                 (res) => {
-                    // alert("Record Added Successfully");  
                     Swal.fire({
                         icon: 'success',
                         title: 'Successful!',
@@ -89,7 +86,6 @@ function AddData() {
                         window.location.reload();
 
                     }).catch((err) => alert(err))
-
 
                 })
         }
